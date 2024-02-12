@@ -6,7 +6,9 @@ import DropdownVue from '@/components/Dropdown.vue';
 <template>
   <main>
     Привет, Мир!
-    <DropdownVue />
-    <ButtonVue />
+    <div class="d-flex gap-2">
+      <DropdownVue />
+      <ButtonVue />
+    </div>
   </main>
 </template>
