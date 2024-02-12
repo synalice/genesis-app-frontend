@@ -1,4 +1,5 @@
 import './assets/css/bootstrap.min.css'
+import './assets/js/popper.min.js'
 import './assets/js/bootstrap.min.js'
 
 import { createApp } from 'vue'
