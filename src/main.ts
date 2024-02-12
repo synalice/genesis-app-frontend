@@ -21,6 +21,8 @@ head.push({
 
 const app = createApp(App)
 
+app.provide('apiBaseUrl', 'http://localhost:3000')
+
 app.use(createPinia())
 app.use(router)
 
