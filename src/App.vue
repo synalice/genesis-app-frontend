@@ -1,5 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+</script>
 
-<template></template>
+<template>
+  <header>
+    Заголовок
+  </header>
+  <RouterView />
+  <footer>
+    Футер
+  </footer>
+</template>
 
 <style scoped></style>
