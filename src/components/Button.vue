@@ -2,12 +2,13 @@
 import { useDropdownEntities } from '@/stores/dropdown-entities';
 import { useResponses } from '@/stores/responses';
 import { storeToRefs } from 'pinia';
-import { inject } from 'vue';
+import { inject, ref } from 'vue';
 
 const { selectedEntity } = storeToRefs(useDropdownEntities())
 const { responses } = storeToRefs(useResponses())
 
 const apiBaseUrl: string | undefined = inject('apiBaseUrl')
+const loading = ref(false)
 
 async function createEntity() {
   if (apiBaseUrl === undefined || selectedEntity.value.apiRoute === undefined) {
@@ -17,9 +18,11 @@ async function createEntity() {
     return
   }
 
+  loading.value = true
   const res = await fetch(apiBaseUrl + selectedEntity.value.apiRoute, {
     method: "POST"
   })
+  loading.value = false
 
   if (!res.ok) {
     console.error("Error while calling the server! Status:", res.status);
@@ -30,7 +33,7 @@ async function createEntity() {
 
   responses.value.push({
     entityName: selectedEntity.value.name,
-    id: responseJSON.id 
+    id: responseJSON.id
   })
 }
 </script>
@@ -42,6 +45,12 @@ async function createEntity() {
     :disabled="selectedEntity.hideButton"
     @click="createEntity()"
   >
-    Создать
+    <span v-if="loading"
+      class="spinner-border spinner-border-sm"
+      aria-hidden="true"
+    ></span>
+    <template v-else>
+      Создать
+    </template>
   </button>
 </template>
